@@ -10,6 +10,6 @@ The goal of this project will be to develop a two-wheeled self-balancing robot. 
 <img src="/Drawings_&_Calculations/Isometric-Overview_Model_V1_5-29-17.PNG" height="300"/>
 
 <h3>Electrical Design</h3>
-<img src="/Drawings_&_Calculations/Isometric-Overview_V1_5-28-17.PNG" height="300"/>
+<img src="/Drawings_&_Calculations/electrical-diagram_V1.PNG" height="300"/>
 
 <h3>Software Design</h3>
