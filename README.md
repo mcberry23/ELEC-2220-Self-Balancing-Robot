@@ -5,11 +5,11 @@ The goal of this project will be to develop a two-wheeled self-balancing robot. 
 
 <h3>Mechanical Design</h3>
 <b>Initial Whiteboard Isometric Drawing</b>
-<img src="/Drawings_&_Calculations/Isometric-Overview_V1_5-28-17.jpg" width="300"/>
+<img src="/Drawings_&_Calculations/Isometric-Overview_V1_5-28-17.jpg" height="300"/>
 <b>Isometric 3D Model</b>
-<img src="/Drawings_&_Calculations/Isometric-Overview_Model_V1_5-29-17.png" width="300"/>
-electrical-diagram_V1
+<img src="/Drawings_&_Calculations/Isometric-Overview_Model_V1_5-29-17.PNG" height="300"/>
+
 <h3>Electrical Design</h3>
-<b>Basic Electrical Block Diagram</b>
-<img src="/Drawings_&_Calculations/electrical-diagram_V1.png" width="300"/>
+<img src="/Drawings_&_Calculations/Isometric-Overview_V1_5-28-17.PNG" height="300"/>
+
 <h3>Software Design</h3>
