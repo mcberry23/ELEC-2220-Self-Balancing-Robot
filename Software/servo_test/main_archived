@@ -1,0 +1,81 @@
+#include <stm32f4xx.h>
+//#include "stm32f4xx_tim.h"
+
+void delay (void)                   //create simple delay loop
+{
+	int d;
+	for (d=0; d<4000000; d++);
+}
+
+void initLeftServo() {
+		//----Init Timer 4----
+		RCC->APB1ENR  |=  RCC_APB1ENR_TIM4EN; //enable timer clock
+		TIM4->PSC			 = 1000;									//prescale = 63
+		TIM4->ARR			 = 320-1;								//up-counting: from 0 to ARR
+		//OC1M = 110 for PWM Mode 1 output on channel 1
+		TIM4->CCMR1		|=	TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_2;
+		TIM4->CCMR1		|=	TIM_CCMR1_OC1PE;		//Output 1 preload enable
+		TIM4->CR1			|= 	TIM_CR1_ARPE;				//Auto-reload preload enable
+		TIM4->CCER		|=  TIM_CCER_CC1E;			//ENABLE output for channel 1
+		TIM4->EGR			|=	TIM_EGR_UG;					//Force updates
+		TIM4->SR			&=	~TIM_SR_UIF;				//Clear the update flag
+		TIM4->DIER		|=	TIM_DIER_UIE;				//ENABLE interrupt on update
+		TIM4->CR1		 	 =	TIM_CR1_CEN;		//Enable timer 4
+		//----Init PB6----
+		RCC->AHB1ENR  |= 	0x02;     	//IO Port B clock enable  = 00000010
+		GPIOB->MODER 	&= ~0x00003000; //clear PB6 mode 
+		GPIOB->MODER  |= 	0x00002000; //PB6 = AF mode 
+		GPIOB->AFR[0] |=  0x02000000; //PB6 = AF2
+}
+void initRightServo() {
+		//----Init Timer 4----
+		RCC->APB1ENR  |=  RCC_APB1ENR_TIM4EN; //enable timer clock
+		TIM4->PSC			 = 1000;									//prescale = 63
+		TIM4->ARR			 = 320-1;								//up-counting: from 0 to ARR
+		//OC2M = 110 for PWM Mode 1 output on channel 2
+		TIM4->CCMR1		|=	TIM_CCMR1_OC2M_1 | TIM_CCMR1_OC2M_2;
+		TIM4->CCMR1		|=	TIM_CCMR1_OC2PE;		//Output 2 preload enable
+		TIM4->CR1			|= 	TIM_CR1_ARPE;				//Auto-reload preload enable
+		TIM4->CCER		|=  TIM_CCER_CC2E;			//ENABLE output for channel 2
+		TIM4->EGR			|=	TIM_EGR_UG;					//Force updates
+		TIM4->SR			&=	~TIM_SR_UIF;				//Clear the update flag
+		TIM4->DIER		|=	TIM_DIER_UIE;				//ENABLE interrupt on update
+		TIM4->CR1		 	 =	TIM_CR1_CEN;		//Enable timer 4
+		//----Init PB7----
+		RCC->AHB1ENR  |= 	0x02;     	//IO Port B clock enable  = 00000010
+		GPIOB->MODER 	&= ~0x0000C000; //clear PB7 mode 
+		GPIOB->MODER  |= 	0x00008000; //PB7 = AF mode 
+		GPIOB->AFR[0] |=  0x50000000; //PB7 = AF5
+}
+
+
+// Sets servo at position from 16 to 32
+void setServo(int servo,int position) {
+		if (servo == 0) { 
+			TIM4->CCR2 = position;
+		}
+		else {	//Left Servo
+			//TIM4->CCR1 = position;
+		}
+}
+
+int main (void) {	
+	int minServoPosition = 16;
+	int midServoPosition = 24;
+	int maxServoPosition = 32;
+	int leftServo = 0;
+	int rightServo = 1;	
+	//initLeftServo();
+	initRightServo();
+	while(1) {
+			setServo(leftServo,minServoPosition);
+			setServo(rightServo,minServoPosition);
+			delay();
+			setServo(leftServo,midServoPosition);
+			setServo(rightServo,midServoPosition);
+			delay();
+			setServo(rightServo,maxServoPosition);
+			setServo(leftServo,maxServoPosition);
+			delay();
+	}
+}
