@@ -52,8 +52,6 @@ void initRightServo() {
 		GPIOB->MODER  |= 	0x00020000; //PB8 = AF mode 
 		GPIOB->AFR[1] |=  0x00000002; //PB8 = AF1
 }
-
-
 // Sets servo at position from 16 to 32
 void setServo(int servo,int position) {
 		if (servo == RIGHTSERVO) { //Right Servo
@@ -78,8 +76,7 @@ void moveBackward(int speed) {
 		setServo(LEFTSERVO,MIDSERVO-speed);
 		setServo(RIGHTSERVO,MIDSERVO+speed);
 }
-
-
+// Main routine that moves the bot forward and backwards with pauses
 int main (void) {	
 	initLeftServo();
 	initRightServo();

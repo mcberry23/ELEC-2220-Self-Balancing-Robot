@@ -10,6 +10,9 @@
 ".\objects\stm32f4xx_hal_rcc_ex.o"
 ".\objects\startup_stm32f407xx.o"
 ".\objects\system_stm32f4xx.o"
+".\objects\stm32f4xx_hal_dma.o"
+".\objects\stm32f4xx_hal_dma_ex.o"
+".\objects\stm32f4xx_hal_spi.o"
 --strict --scatter ".\Objects\main.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
